@@ -17,6 +17,7 @@ import { Input } from "./ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import ContactForm from '@/components/ContactForm';
+import { CONTACT_EMAIL } from '@/lib/config';
 
 export const Settings = () => {
   const [offlineMode, setOfflineMode] = useState(
