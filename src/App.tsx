@@ -44,29 +44,31 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <InstallPrompt />
-        <AIAssistant />
-        <HashRouter>
-          <AnalyticsListener />
-          <SyncBridge />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
-            <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
-            <Route path="/admin/analytics" element={<AdminRoute><AdminAnalytics /></AdminRoute>} />
-            <Route path="/admin/fix-steps" element={<AdminRoute><AdminFixSteps /></AdminRoute>} />
-            <Route path="/admin/app-logs" element={<AdminRoute><AdminAppLogs /></AdminRoute>} />
-            <Route path="/admin/add-error-info" element={<AdminRoute><AdminAddErrorInfo /></AdminRoute>} />
-            <Route path="/admin/add-device" element={<AdminRoute><AdminAddDevice /></AdminRoute>} />
-            <Route path="/pdf-files" element={<ButtonPage title="PDF Files" />} />
-            {buttonRoutes.map((route, index) => (
-              <Route key={index} path={route.path} element={route.element} />
-            ))}
-          </Routes>
-        </HashRouter>
+        <TooltipToggleProvider>
+          <Toaster />
+          <Sonner />
+          <InstallPrompt />
+          <AIAssistant />
+          <HashRouter>
+            <AnalyticsListener />
+            <SyncBridge />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
+              <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
+              <Route path="/admin/analytics" element={<AdminRoute><AdminAnalytics /></AdminRoute>} />
+              <Route path="/admin/fix-steps" element={<AdminRoute><AdminFixSteps /></AdminRoute>} />
+              <Route path="/admin/app-logs" element={<AdminRoute><AdminAppLogs /></AdminRoute>} />
+              <Route path="/admin/add-error-info" element={<AdminRoute><AdminAddErrorInfo /></AdminRoute>} />
+              <Route path="/admin/add-device" element={<AdminRoute><AdminAddDevice /></AdminRoute>} />
+              <Route path="/pdf-files" element={<ButtonPage title="PDF Files" />} />
+              {buttonRoutes.map((route, index) => (
+                <Route key={index} path={route.path} element={route.element} />
+              ))}
+            </Routes>
+          </HashRouter>
+        </TooltipToggleProvider>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
