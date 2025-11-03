@@ -4,6 +4,7 @@ import { Home, Plus, Edit, Trash2, Users, BarChart3, Wrench, ScrollText, FilePlu
 import TopRightControls from "@/components/TopRightControls";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserRole } from "@/hooks/useUserRole";
+import { getAllDevices, subscribeToDevices, type DeviceWithBrand } from "@/lib/deviceManager";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
