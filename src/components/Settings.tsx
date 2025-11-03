@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
+const { useEffect, useState } = React;
 import { Settings as SettingsIcon, Info } from "lucide-react";
 import { Button } from "./ui/button";
 import {
@@ -263,7 +264,7 @@ export const Settings = () => {
                 <a href="https://jayreddin.github.io" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Jamie Reddin</a>
               </p>
               <p>
-                <span className="font-medium">Version:</span> 1.5.8
+                <span className="font-medium">Version:</span> 1.5.9
               </p>
 
               <p>
