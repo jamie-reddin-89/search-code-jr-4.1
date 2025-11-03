@@ -13,6 +13,7 @@ import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminFixSteps from "./pages/AdminFixSteps";
 import AdminAppLogs from "./pages/AdminAppLogs";
 import AdminAddErrorInfo from "./pages/AdminAddErrorInfo";
+import AdminAddErrorCode from "./pages/AdminAddErrorCode";
 import AdminAddDevice from "./pages/AdminAddDevice";
 import ButtonPage from "./components/ButtonPage";
 import InstallPrompt from "./components/InstallPrompt";
@@ -61,6 +62,7 @@ const App = () => (
               <Route path="/admin/fix-steps" element={<AdminRoute><AdminFixSteps /></AdminRoute>} />
               <Route path="/admin/app-logs" element={<AdminRoute><AdminAppLogs /></AdminRoute>} />
               <Route path="/admin/add-error-info" element={<AdminRoute><AdminAddErrorInfo /></AdminRoute>} />
+              <Route path="/admin/add-error-code" element={<AdminRoute><AdminAddErrorCode /></AdminRoute>} />
               <Route path="/admin/add-device" element={<AdminRoute><AdminAddDevice /></AdminRoute>} />
               <Route path="/pdf-files" element={<ButtonPage title="PDF Files" />} />
               {buttonRoutes.map((route, index) => (
