@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Home, Plus, Edit, Trash2, Users, BarChart3, Wrench, ScrollText, FilePlus2 } from "lucide-react";
+import { Home, Plus, Edit, Trash2, Users, BarChart3, Wrench, ScrollText, FilePlus2, Package } from "lucide-react";
 import TopRightControls from "@/components/TopRightControls";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserRole } from "@/hooks/useUserRole";
+import { getAllDevices, subscribeToDevices, type DeviceWithBrand } from "@/lib/deviceManager";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -60,13 +61,35 @@ export default function Admin() {
   const [errorCodes, setErrorCodes] = useState<ErrorCode[]>([]);
   const [editingCode, setEditingCode] = useState<ErrorCode | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [devices, setDevices] = useState<DeviceWithBrand[]>([]);
+  const [devicesLoading, setDevicesLoading] = useState(true);
   const { toast } = useToast();
 
   useEffect(() => {
     if (isAdmin) {
       loadErrorCodes();
+      loadDevices();
     }
   }, [isAdmin]);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToDevices((newDevices) => {
+      setDevices(newDevices);
+    });
+    return unsubscribe;
+  }, []);
+
+  async function loadDevices() {
+    try {
+      setDevicesLoading(true);
+      const allDevices = await getAllDevices();
+      setDevices(allDevices);
+    } catch (error) {
+      console.error("Error loading devices:", error);
+    } finally {
+      setDevicesLoading(false);
+    }
+  }
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -224,10 +247,23 @@ export default function Admin() {
           <ScrollText size={20} />
           App Logs
         </Link>
+        <Link to="/admin/add-device" className="nav-button flex items-center justify-center gap-2">
+          <Package size={20} />
+          Add Device
+        </Link>
         <Link to="/admin/add-error-info" className="nav-button flex items-center justify-center gap-2">
           <FilePlus2 size={20} />
           Add Error Info
         </Link>
+        {devices.map((device) => (
+          <Link
+            key={device.id}
+            to={`/${device.brand.name.toLowerCase().replace(/\s+/g, "-")}-${device.name.toLowerCase().replace(/\s+/g, "-")}`}
+            className="nav-button flex items-center justify-center gap-2"
+          >
+            {device.brand.name} {device.name}
+          </Link>
+        ))}
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <button className="nav-button flex items-center justify-center gap-2" onClick={() => setEditingCode(null)}>
